@@ -1,8 +1,7 @@
-package com.example.VS_PU02;
+package var.web.ws.poll;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.json.Json;
 
 @ServerEndpoint(value = "/election", encoders=DataEncoder.class)
@@ -10,10 +9,7 @@ public class ElectionService {
     Session session;
     @OnOpen
     public void open(Session session) {
-        /*SensorSimulator sensor = new SensorSimulator(session);
-        session.getUserProperties().put("sensor", sensor);
-        sensor.start();
-        */
+
         this.session = session;
         System.out.println("Hallo ich bin da: " + this.session.toString());
         BallotBox local_box = BallotBox.getInstance();
@@ -31,15 +27,15 @@ public class ElectionService {
     @OnClose
     public void close(Session session) {
         System.out.println("Hallo ich gehe: " + this.session.toString());
-        com.example.VS_PU02.BallotBox.getInstance().removeObserver(this);
+        BallotBox.getInstance().removeObserver(this);
 
     }
 
-    public void notify(com.example.VS_PU02.BallotBox zwischenstand) throws IOException, EncodeException {
+    public void notify(BallotBox zwischenstand) throws IOException, EncodeException {
         System.out.println("Called notify");
-        RemoteEndpoint.Basic client = this.session.getBasicRemote();
         if(session.isOpen()) {
             try {
+                RemoteEndpoint.Basic client = this.session.getBasicRemote();
                 System.out.println("Sending something");
                 System.out.println(Json.createObjectBuilder().add("votes", "" + zwischenstand.countVotes()).build().toString());
                 client.sendObject(zwischenstand);

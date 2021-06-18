@@ -1,5 +1,5 @@
 
-package com.example.VS_PU02;
+package var.web.ws.poll;
 
 import javax.websocket.EncodeException;
 import javax.websocket.Encoder;
@@ -10,6 +10,7 @@ import javax.json.Json;
 public class DataEncoder implements Encoder.Text<BallotBox>{
     @Override
     public String encode(BallotBox ballotBox) throws EncodeException {
+        System.out.println("Encoder called.");
         return Json.createObjectBuilder().add("votes", "" + ballotBox.countVotes()).build().toString();
     }
 

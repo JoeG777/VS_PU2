@@ -1,6 +1,4 @@
-package com.example.VS_PU02;
-
-import com.example.VS_PU02.ElectionService;
+package var.web.ws.poll;
 
 import java.io.IOException;
 import java.util.HashMap;

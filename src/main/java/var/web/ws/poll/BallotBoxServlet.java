@@ -1,8 +1,7 @@
-package com.example.VS_PU02;
+package var.web.ws.poll;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +21,7 @@ public class BallotBoxServlet extends HttpServlet {
 
 	public BallotBoxServlet() {
 		super();
-		this.election = com.example.VS_PU02.BallotBox.getInstance();
+		this.election = BallotBox.getInstance();
 	}
 
 	@Override
